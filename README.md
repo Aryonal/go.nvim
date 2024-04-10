@@ -1,6 +1,6 @@
 # gou.nvim
 
-An experimental plugin for miscellaneous functions for go.
+An experimental plugin with miscellaneous functions for go.
 
 ## Features
 
@@ -34,6 +34,8 @@ An experimental plugin for miscellaneous functions for go.
 
 ## Configuration
 
+Default options
+
 ```lua
 {
     gotests = {
@@ -47,3 +49,7 @@ An experimental plugin for miscellaneous functions for go.
 
 - `GoTestsFunc`: generate test for function cursor is in
 - `GoTests`: generate test for current file
+
+## Relevant
+
+- [gotests-vim](https://github.com/buoto/gotests-vim)
