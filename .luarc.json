@@ -1,0 +1,9 @@
+{
+  "format.defaultConfig": {
+    "indent_style": "space",
+    "indent_size": "4",
+    "max_line_length": "120",
+    "quote_style": "double"
+  },
+  "diagnostics.disable": ["undefined-global"]
+}
