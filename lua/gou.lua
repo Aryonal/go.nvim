@@ -14,7 +14,7 @@ local default_opts = {
 
 local function setup_gotests(opts)
     vim.api.nvim_create_user_command(
-        "GoTestsFunc",
+        "GoTestsGenFunc",
         function()
             local ts = require("gou.ts")
 
@@ -26,7 +26,7 @@ local function setup_gotests(opts)
         { desc = "Generate tests for current function" })
 
     vim.api.nvim_create_user_command(
-        "GoTests",
+        "GoTestsGen",
         function()
             require("gou.gotests").gotests(opts.gotests, "")
         end,
@@ -35,7 +35,7 @@ end
 
 local function setup_run(opts)
     vim.api.nvim_create_user_command(
-        "RunTestFunc",
+        "GoTestFunc",
         function(args)
             local ts = require("gou.ts")
 
@@ -49,7 +49,7 @@ local function setup_run(opts)
         { desc = "Run tests for current function, or a test case if specified", nargs = "*" })
 
     vim.api.nvim_create_user_command(
-        "RunTestPkg",
+        "GoTestPkg",
         function()
             require("gou.run").test(opts.run, "", "")
         end,

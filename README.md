@@ -4,7 +4,8 @@ An experimental plugin with miscellaneous functions for go.
 
 ## Features
 
-- Generate tests by gotests, require treesitter
+- Generate tests by gotests
+- Run tests close to the cursor
 
 ## Install
 
@@ -50,14 +51,14 @@ Default options
 
 For gotests
 
-- `GoTestsFunc`: generate test for function cursor is in
-- `GoTests`: generate test for current file
+- `GoTestsGenFunc`: generate test for the function cursor is in
+- `GoTestsGen`: generate test for current file
 
 For run
 
-- `RunTestPkg`: run `go test` over current package
-- `RunTestFunc`: run `go test` over function cursor is in
-- `RunTestFunc <test case name>`: run `go test` over certain sub case in the function cursor is in
+- `GoTestPkg`: run `go test` over current package
+- `GoTestFunc`: run `go test` over function cursor is in
+- `GoTestFunc <test case name>`: run `go test` over certain sub case in the function cursor is in
 
 ## Relevant
 
