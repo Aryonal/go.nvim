@@ -9,6 +9,8 @@ local function is_function(typ)
     return typ == "function_declaration" or typ == "method_declaration"
 end
 
+---TODO: confirm ts parse is available in current buffer
+
 ---get the first parent function node or nil, current node is included
 ---@return TSNode: function node
 function M.get_first_parent_func_node()

@@ -4,7 +4,7 @@ An experimental plugin with miscellaneous functions for go.
 
 ## Features
 
-- Generate tests by gotests
+- Generate tests by gotests, require treesitter
 
 ## Install
 
@@ -20,10 +20,6 @@ An experimental plugin with miscellaneous functions for go.
     ft = {
         "go",
     },
-    cmd = {
-        "GoTests",
-        "GoTestsFunc",
-    },
     config = function()
         require("gou").setup({})
     end
@@ -38,8 +34,13 @@ Default options
 
 ```lua
 {
+    run = {
+        enabled = true,
+        test_flag = "", -- go help testflag
+    },
     gotests = {
-        named = true,
+        enabled = true,
+        named = true, -- gotests -named
         template_dir = "",
     }
 }
@@ -47,8 +48,16 @@ Default options
 
 ## Usage
 
+For gotests
+
 - `GoTestsFunc`: generate test for function cursor is in
 - `GoTests`: generate test for current file
+
+For run
+
+- `RunTestPkg`: run `go test` over current package
+- `RunTestFunc`: run `go test` over function cursor is in
+- `RunTestFunc <test case name>`: run `go test` over certain sub case in the function cursor is in
 
 ## Relevant
 

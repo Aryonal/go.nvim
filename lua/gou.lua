@@ -1,16 +1,18 @@
 local M = {}
 
 local default_opts = {
+    run = {
+        enabled = true,
+        test_flag = "",
+    },
     gotests = {
+        enabled = true,
         named = true,
         template_dir = "",
     }
 }
 
-function M.setup(opts)
-    opts = opts or {}
-    opts = require("gou.utils").merge_tbl(default_opts, opts)
-
+local function setup_gotests(opts)
     vim.api.nvim_create_user_command(
         "GoTestsFunc",
         function()
@@ -29,6 +31,42 @@ function M.setup(opts)
             require("gou.gotests").gotests(opts.gotests, "")
         end,
         { desc = "Generate tests for current file" })
+end
+
+local function setup_run(opts)
+    vim.api.nvim_create_user_command(
+        "RunTestFunc",
+        function(args)
+            local ts = require("gou.ts")
+
+            local last_func_node = ts.get_last_parent_func_node()
+            local func_name = ts.get_function_node_name(last_func_node)
+
+            local case_name = args.args
+
+            require("gou.run").test(opts.run, func_name, case_name)
+        end,
+        { desc = "Run tests for current function, or a test case if specified", nargs = "*" })
+
+    vim.api.nvim_create_user_command(
+        "RunTestPkg",
+        function()
+            require("gou.run").test(opts.run, "", "")
+        end,
+        { desc = "Run tests for current package" })
+end
+
+function M.setup(opts)
+    opts = opts or {}
+    opts = require("gou.utils").merge_opts(default_opts, opts)
+
+    if opts.gotests.enabled then
+        setup_gotests(opts)
+    end
+
+    if opts.run.enabled then
+        setup_run(opts)
+    end
 end
 
 return M
