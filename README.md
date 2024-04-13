@@ -60,6 +60,11 @@ For run
 - `GoTestFunc`: run `go test` over function cursor is in
 - `GoTestFunc <test case name>`: run `go test` over certain sub case in the function cursor is in
 
+## Roadmap
+
+- [ ] Support Fuzz and Bench
+- [ ] Support package management, packspec or rockspec
+
 ## Relevant
 
 - [gotests-vim](https://github.com/buoto/gotests-vim)

@@ -1,14 +1,17 @@
 local M = {}
 
 ---Merge two tables into one.
----If elements in a and b share the same key, value from b will overwrite value from a.
----If elements in only in a, adopt it,
----If elements appear only in b, it is dropped,
+---If a key appears in both a and b, value from b will overwrite a,
+---If a key appears only in a, adopt its value,
+---If a key appears only in b, or value is nil, drop it,
 ---@param a table: the first table to merge.
 ---@param b table: the second table to merge.
 ---@return table: the merged table.
 function M.merge_opts(a, b)
     if type(a) ~= "table" or type(b) ~= "table" then
+        if b ~= nil then
+            return b
+        end
         return a
     end
 

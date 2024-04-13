@@ -18,8 +18,9 @@ function M.gotests(opts, func_name)
         args = vim.list_extend(args, { "-only", func_name })
     end
 
-    if opts.template_dir then
-        args = vim.list_extend(args, { "-template_dir", opts.template_dir })
+    if opts.template_dir ~= "" then
+        local dir = vim.fn.expand(opts.template_dir)
+        args = vim.list_extend(args, { "-template_dir", dir })
     end
 
     local path = vim.fn.expand("%:p")

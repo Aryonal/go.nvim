@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-doc-name, return-type-mismatch
 local M = {}
 
 local ts_utils = require("nvim-treesitter.ts_utils")

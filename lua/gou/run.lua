@@ -13,7 +13,7 @@ local function is_go_test_func(func_name)
 end
 
 function M.test(opts, func_name, case_name)
-    if not is_go_test_func(func_name) then
+    if func_name ~= "" and not is_go_test_func(func_name) then
         vim.notify("Not a go test function")
         return
     end
