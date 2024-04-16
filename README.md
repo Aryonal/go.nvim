@@ -37,7 +37,7 @@ Default options
 {
     run = {
         enabled = true,
-        test_flag = "", -- go help testflag
+        test_flag = "", -- go help testflag, string | table
     },
     gotests = {
         enabled = true,

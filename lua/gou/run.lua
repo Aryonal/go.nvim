@@ -26,8 +26,11 @@ function M.test(opts, func_name, case_name)
         "go", "test",
     }
 
-    if opts.test_flag ~= "" then
+    if type(opts.test_flag) == "string" and opts.test_flag ~= "" then
         args = vim.list_extend(args, { opts.test_flag })
+    end
+    if type(opts.test_flag) == "table" and opts.test_flag ~= {} then
+        args = vim.list_extend(args, opts.test_flag)
     end
 
     if func_name ~= "" then
