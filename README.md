@@ -1,6 +1,6 @@
 # gou.nvim
 
-An experimental plugin with miscellaneous functions for go.
+A toy plugin with miscellaneous functions for go.
 
 ## Features
 

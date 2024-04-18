@@ -1,5 +1,7 @@
 local M = {}
 
+---DEPRECATED: use vim.tbl_deep_extend
+---
 ---Merge two tables into one.
 ---If a key appears in both a and b, value from b will overwrite a,
 ---If a key appears only in a, adopt its value,
