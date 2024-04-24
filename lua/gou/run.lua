@@ -22,8 +22,9 @@ function M.test(opts, func_name, case_name)
 
     local pkg_path = "./" .. require("gou.utils").crop(path, cwd)
 
+    local cmd = "go"
     local args = {
-        "go", "test",
+        "test",
     }
 
     if type(opts.test_flag) == "string" and opts.test_flag ~= "" then
@@ -43,10 +44,23 @@ function M.test(opts, func_name, case_name)
 
     args = vim.list_extend(args, { pkg_path })
 
-    vim.notify(table.concat(args, " "))
-    vim.notify("...") -- TODO: make it async
+    print(table.concat(vim.list_extend({ cmd, }, args), " "))
+    print("...")
 
-    vim.notify(vim.fn.system(args))
+    if not opts.async then
+        vim.notify(vim.fn.system(vim.list_extend({ cmd, }, args)))
+    else
+        local Job = require("plenary.job")
+        Job:new({
+            command = cmd,
+            args = args,
+            cwd = vim.fn.getcwd(),
+            on_stdout = function(err, data)
+                print(err)
+                print(data)
+            end,
+        }):start()
+    end
 end
 
 return M

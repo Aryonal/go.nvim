@@ -16,6 +16,7 @@ A toy plugin with miscellaneous functions for go.
 {
     "aryonal/gou.nvim",
     dependencies = {
+        "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
     },
     ft = {
@@ -37,10 +38,12 @@ Default options
 {
     run = {
         enabled = true,
+        async = true,
         test_flag = "", -- go help testflag, string | table
     },
     gotests = {
         enabled = true,
+        async = true,
         named = true, -- gotests -named
         template_dir = "",
     }

@@ -53,6 +53,7 @@ function M.get_function_node_name(node)
     if node == nil then
         return ""
     end
+    ---@diagnostic disable-next-line: undefined-field
     local name_node = node:field("name")[1]
     return vim.treesitter.get_node_text(name_node, 0)
 end

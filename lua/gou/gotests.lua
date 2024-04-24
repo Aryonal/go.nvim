@@ -5,8 +5,9 @@ function M.gotests(opts, func_name)
         vim.notify("gotests not found")
     end
 
+    local cmd = "gotests"
+
     local args = {
-        "gotests",
         "-w",
     }
 
@@ -29,10 +30,23 @@ function M.gotests(opts, func_name)
 
     args = vim.list_extend(args, { "." .. path })
 
-    vim.notify(table.concat(args, " "))
-    vim.notify("...") -- TODO: make it async
+    print(table.concat(vim.list_extend({ cmd, }, args), " "))
+    print("...")
 
-    vim.notify(vim.fn.system(args))
+    if not opts.async then
+        vim.notify(vim.fn.system(vim.list_extend({ cmd, }, args)))
+    else
+        local Job = require("plenary.job")
+        Job:new({
+            command = cmd,
+            args = args,
+            cwd = vim.fn.getcwd(),
+            on_stdout = function(err, data)
+                print(err)
+                print(data)
+            end,
+        }):start()
+    end
 end
 
 return M

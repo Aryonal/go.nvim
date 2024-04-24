@@ -3,10 +3,12 @@ local M = {}
 local default_opts = {
     run = {
         enabled = true,
+        async = true,
         test_flag = "",
     },
     gotests = {
         enabled = true,
+        async = true,
         named = true,
         template_dir = "",
     }
