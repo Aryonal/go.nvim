@@ -20,7 +20,7 @@ function M.test(opts, func_name, case_name)
     local cwd = vim.fn.getcwd() .. "/"
     local path = vim.fn.expand("%:p:h")
 
-    local pkg_path = "./" .. require("gou.utils").crop(path, cwd)
+    local pkg_path = "./" .. require("go.utils").crop(path, cwd)
 
     local cmd = "go"
     local args = {

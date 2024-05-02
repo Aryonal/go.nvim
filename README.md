@@ -1,4 +1,4 @@
-# gou.nvim
+# go.nvim
 
 A toy plugin with miscellaneous functions for go.
 
@@ -14,7 +14,7 @@ A toy plugin with miscellaneous functions for go.
 
 ```lua
 {
-    "aryonal/gou.nvim",
+    "aryonal/go.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
@@ -23,7 +23,7 @@ A toy plugin with miscellaneous functions for go.
         "go",
     },
     config = function()
-        require("gou").setup({})
+        require("go").setup({})
     end
 }
 ```
