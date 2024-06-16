@@ -1,14 +1,17 @@
 local M = {}
 
 local default_opts = {
+    mode = "terminal", -- one of "terminal", "sync", "async"
     run = {
         enabled = true,
-        async = true,
+        mode = "terminal",
+        async = true, ---@deprecated: use mode instead, ignore if mode is set
         test_flag = "",
     },
     gotests = {
         enabled = true,
-        async = true,
+        mode = "terminal",
+        async = true, ---@deprecated: use mode instead, ignore if mode is set
         named = true,
         template_dir = "",
     }
@@ -23,14 +26,14 @@ local function setup_gotests(opts)
             local last_func_node = ts.get_last_parent_func_node()
             local func_name = ts.get_function_node_name(last_func_node)
 
-            require("go.gotests").gotests(opts.gotests, func_name)
+            require("go.gotests").gotests(opts, func_name)
         end,
         { desc = "Generate tests for current function" })
 
     vim.api.nvim_create_user_command(
         "GoTestsGen",
         function()
-            require("go.gotests").gotests(opts.gotests, "")
+            require("go.gotests").gotests(opts, "")
         end,
         { desc = "Generate tests for current file" })
 end
@@ -46,14 +49,14 @@ local function setup_run(opts)
 
             local case_name = args.args
 
-            require("go.run").test(opts.run, func_name, case_name)
+            require("go.run").test(opts, func_name, case_name)
         end,
         { desc = "Run tests for current function, or a test case if specified", nargs = "*" })
 
     vim.api.nvim_create_user_command(
         "GoTestPkg",
         function()
-            require("go.run").test(opts.run, "", "")
+            require("go.run").test(opts, "", "")
         end,
         { desc = "Run tests for current package" })
 end

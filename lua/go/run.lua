@@ -27,11 +27,11 @@ function M.test(opts, func_name, case_name)
         "test",
     }
 
-    if type(opts.test_flag) == "string" and opts.test_flag ~= "" then
-        args = vim.list_extend(args, { opts.test_flag })
+    if type(opts.run.test_flag) == "string" and opts.run.test_flag ~= "" then
+        args = vim.list_extend(args, { opts.run.test_flag })
     end
-    if type(opts.test_flag) == "table" and opts.test_flag ~= {} then
-        args = vim.list_extend(args, opts.test_flag)
+    if type(opts.run.test_flag) == "table" and opts.run.test_flag ~= {} then
+        args = vim.list_extend(args, opts.run.test_flag)
     end
 
     if func_name ~= "" then
@@ -44,23 +44,14 @@ function M.test(opts, func_name, case_name)
 
     args = vim.list_extend(args, { pkg_path })
 
-    print(table.concat(vim.list_extend({ cmd, }, args), " "))
-    print("...")
-
-    if not opts.async then
-        vim.notify(vim.fn.system(vim.list_extend({ cmd, }, args)))
-    else
-        local Job = require("plenary.job")
-        Job:new({
-            command = cmd,
-            args = args,
-            cwd = vim.fn.getcwd(),
-            on_stdout = function(err, data)
-                print(err)
-                print(data)
-            end,
-        }):start()
+    local mode = opts.run.mode or opts.mode
+    if not mode then
+        if opts.run.async == true then
+            mode = "async"
+        end
     end
+
+    require("go.utils").run_cmd(mode, cmd, args)
 end
 
 return M

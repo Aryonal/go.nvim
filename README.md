@@ -36,14 +36,17 @@ Default options
 
 ```lua
 {
+    mode = "terminal", -- one of "terminal", "sync", "async"
     run = {
         enabled = true,
-        async = true,
+        mode = "terminal",
+        async = true, ---@deprecated: use mode instead, ignore if mode is set
         test_flag = "", -- go help testflag, string | table
     },
     gotests = {
         enabled = true,
-        async = true,
+        mode = "terminal",
+        async = true, ---@deprecated: use mode instead, ignore if mode is set
         named = true, -- gotests -named
         template_dir = "",
     }

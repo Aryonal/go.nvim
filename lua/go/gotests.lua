@@ -11,7 +11,7 @@ function M.gotests(opts, func_name)
         "-w",
     }
 
-    if opts.named then
+    if opts.gotests.named then
         table.insert(args, "-named")
     end
 
@@ -19,8 +19,8 @@ function M.gotests(opts, func_name)
         args = vim.list_extend(args, { "-only", func_name })
     end
 
-    if opts.template_dir ~= "" then
-        local dir = vim.fn.expand(opts.template_dir)
+    if opts.gotests.template_dir ~= "" then
+        local dir = vim.fn.expand(opts.gotests.template_dir)
         args = vim.list_extend(args, { "-template_dir", dir })
     end
 
@@ -30,23 +30,14 @@ function M.gotests(opts, func_name)
 
     args = vim.list_extend(args, { "." .. path })
 
-    print(table.concat(vim.list_extend({ cmd, }, args), " "))
-    print("...")
-
-    if not opts.async then
-        vim.notify(vim.fn.system(vim.list_extend({ cmd, }, args)))
-    else
-        local Job = require("plenary.job")
-        Job:new({
-            command = cmd,
-            args = args,
-            cwd = vim.fn.getcwd(),
-            on_stdout = function(err, data)
-                print(err)
-                print(data)
-            end,
-        }):start()
+    local mode = opts.gotests.mode or opts.mode
+    if not mode then
+        if opts.gotests.async == true then
+            mode = "async"
+        end
     end
+
+    require("go.utils").run_cmd(mode, cmd, args)
 end
 
 return M
